@@ -39,28 +39,25 @@ namespace Picscut
 
         private void PicsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PictureBox.Image = PicsList.SelectedPicture.Bitmap;
-            AdjustPictureBoxSize();
+            Cropper.Image = PicsList.SelectedPicture.Bitmap;            
+            AdjustCropperSize();
         }
 
-        private void AdjustPictureBoxSize()
+        private void AdjustCropperSize()
         {
-            if (PictureBox.Image == null)
+            if (Cropper.Image == null) 
                 return;
-            PictureBox.Size = FitRatio(PicViewer.Size, PictureBox.Image.Size);
-            PictureBox.Left = (PicViewer.Width - PictureBox.Width) / 2;
-            PictureBox.Top = (PicViewer.Height - PictureBox.Height) / 2;
 
-            Cropper.Left = PictureBox.Left;
-            Cropper.Top = PictureBox.Top;
-            Cropper.Size = PictureBox.Size;
-            Cropper.EffectizeSize = PictureBox.Image.Size;
+            Cropper.Size = FitRatio(PicViewer.Size, Cropper.Image.Size);
+            Cropper.Left = (PicViewer.Width - Cropper.Width) / 2;
+            Cropper.Top = (PicViewer.Height - Cropper.Height) / 2;            
+            Cropper.EffectizeSize = Cropper.Image.Size;
             Cropper.Invalidate();
         }
 
         private void PicViewer_Resize(object sender, EventArgs e)
         {
-            AdjustPictureBoxSize();
+            AdjustCropperSize();
         }      
 
         private void PicsList_PicsSizeChanged(object sender, EventArgs e)

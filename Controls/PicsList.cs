@@ -49,7 +49,9 @@ namespace Picscut.Controls
             {
                 var item = Items[e.Index] as Picture;                
                 e.Graphics.DrawImage(item.Thumbnail, e.Bounds);
-            }
+                if (e.Index != 0)
+                    e.Graphics.DrawLine(Pens.Gray,e.Bounds.Left, e.Bounds.Top, e.Bounds.Left, e.Bounds.Top + e.Bounds.Height);
+            }            
             e.DrawFocusRectangle();
         }                
 
