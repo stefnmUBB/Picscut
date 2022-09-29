@@ -20,11 +20,39 @@ namespace Picscut
 
         private void MainForm_Load(object sender, EventArgs e)
         {            
-            for (int k = 1; k < 20; k++)
+            for (int k = 1; k < 50; k++)
             {
-                PicsList.AddPicture($@"C:\Users\Stefan\Pictures\Screenshots\Screenshot ({k}).png");
-            }
-            //PicsList.Refresh();
+                if (System.IO.File.Exists($@"C:\Users\Stefan\Pictures\Screenshots\Screenshot ({k}).png"))
+                {
+                    PicsList.AddPicture($@"C:\Users\Stefan\Pictures\Screenshots\Screenshot ({k}).png");
+                }
+            }            
+        }
+
+        Size FitRatio(Size container, Size target)
+        {
+            Size sw = new Size(container.Width, target.Height * container.Width / target.Width);
+            Size sh = new Size(target.Width * container.Height / target.Height, container.Height);
+            if (sw.Height < container.Height) return sw;
+            else return sh;
+        }
+
+        private void PicsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PictureBox.Image = PicsList.SelectedPicture.Bitmap;
+            AdjustPictureBoxSize();
+        }
+
+        private void AdjustPictureBoxSize()
+        {
+            PictureBox.Size = FitRatio(Body.Size, PictureBox.Image.Size);
+            PictureBox.Left = (Body.Width - PictureBox.Width) / 2;
+            PictureBox.Top = (Body.Height - PictureBox.Height) / 2;
+        }
+
+        private void PicViewer_Resize(object sender, EventArgs e)
+        {
+            AdjustPictureBoxSize();
         }
     }
 }

@@ -22,23 +22,33 @@ namespace Picscut.Controls
             this.ColumnWidth = 64;
             this.HorizontalScrollbar = true;
             this.Height = 64 + SystemInformation.HorizontalScrollBarHeight;
-            this.ItemHeight = 64;                        
+            this.ItemHeight = 64;
+            this.IntegralHeight = false;
         }        
 
         public void Init()
         {
             DataSource = new BindingList<Picture>();
         }
-        
+
+        bool resizing = false;
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            if (resizing) return;
+            resizing = true;
+            this.ItemHeight = this.ColumnWidth = Height - SystemInformation.HorizontalScrollBarHeight;
+            resizing = false;
+
+        }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             e.DrawBackground();
             if (0 <= e.Index && e.Index < Items.Count) 
             {
-                var item = Items[e.Index] as Picture;
-                e.Graphics.DrawImage(item.Bitmap, e.Bounds);
-                //e.Graphics.DrawImage(item.Thumbnail, e.Bounds);
+                var item = Items[e.Index] as Picture;                
+                e.Graphics.DrawImage(item.Thumbnail, e.Bounds);
             }
             e.DrawFocusRectangle();
         }                
@@ -60,5 +70,7 @@ namespace Picscut.Controls
                 MessageBox.Show(e.Message, "Error");
             }
         }
+
+        public Picture SelectedPicture { get => SelectedValue as Picture; }
     }
 }

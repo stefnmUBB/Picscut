@@ -14,7 +14,7 @@ namespace Picscut.Data
         public string Path { get; set; }
         public Bitmap Bitmap { get; set; }
 
-        /*[NonSerialized]
+        [NonSerialized]
         private Bitmap _Thumbnail = null;
         
         public Bitmap Thumbnail
@@ -23,21 +23,21 @@ namespace Picscut.Data
             {
                 if(_Thumbnail==null)
                 {
-                    _Thumbnail = new Bitmap(64, 64);
-                    int w = 64, h = 64;
+                    int tsize = 128;
+                    _Thumbnail = new Bitmap(tsize, tsize);
+                    int w = tsize, h = tsize;
                     if(Bitmap.Width>Bitmap.Height)
                     {
-                        h = 64 * Bitmap.Height / Bitmap.Width;
+                        h = tsize * Bitmap.Height / Bitmap.Width;
                     }
                     else
                     {
-                        w = 64 * Bitmap.Width / Bitmap.Height;
+                        w = tsize * Bitmap.Width / Bitmap.Height;
                     }
-                    Graphics.FromImage(_Thumbnail).DrawImage(Bitmap, (64 - w) / 2, (64 - h) / 2, w, h);
+                    Graphics.FromImage(_Thumbnail).DrawImage(Bitmap, (tsize - w) / 2, (tsize - h) / 2, w, h);
                 }
                 return _Thumbnail;
-            }
-            set { _Thumbnail = value; }
-        }*/
+            }            
+        }
     }
 }
