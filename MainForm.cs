@@ -64,5 +64,13 @@ namespace Picscut
         {
 
         }
+
+        private void Cropper_SelectionBoundsChanged(object arg1, EventArgs arg2)
+        {
+            SelTopBox.Value = Cropper.SelectionBounds.Top;
+            SelLeftBox.Value = Cropper.SelectionBounds.Left;
+            SelWidthBox.Value = Cropper.SelectionBounds.Width;
+            SelHeightBox.Value = Cropper.SelectionBounds.Height;
+        }
     }
 }

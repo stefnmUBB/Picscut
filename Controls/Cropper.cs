@@ -22,6 +22,12 @@ namespace Picscut.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             UpdateStyles();
+
+            if(LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                // Design Mode, disable timer
+                CursorSupervisor.Enabled = false;
+            }
         }
 
         private Bitmap _Image = null;
@@ -174,7 +180,7 @@ namespace Picscut.Controls
 
         Timer CursorSupervisor = new Timer
         {
-            Interval = 10,
+            Interval = 50,
             Enabled = true
         };
 
@@ -245,8 +251,9 @@ namespace Picscut.Controls
                             break;
                         }
                     default:break;
-                }
+                }                
                 RenderedRect = new Rectangle(l, t, r - l, b - t);
+                UpdateSelection();
             }
 
             for (int i=0;i<4;i++)
@@ -260,6 +267,24 @@ namespace Picscut.Controls
             }
             HoveredDragButtonId = -1;
             base.OnMouseHover(e);
+        }
+
+        void UpdateSelection()
+        {
+            var l = RenderedRect.Left;
+            var t = RenderedRect.Top;
+            var w = RenderedRect.Width + 1;
+            var h = RenderedRect.Height + 1;
+            var rect = new Rectangle
+            (
+                l * EffectiveWidth / Width,
+                t * EffectiveHeight / Height,
+                w * EffectiveWidth / Width,
+                h * EffectiveHeight / Height
+            );
+            PerformSelectionBoundsChangedEvent = false;
+            SelectionBounds = rect;
+            PerformSelectionBoundsChangedEvent = true;
         }
 
         protected void OnEffectiveSizeChanged(object o, EventArgs e)
@@ -293,8 +318,11 @@ namespace Picscut.Controls
             RenderedRect = rect;
         }
 
+        bool PerformSelectionBoundsChangedEvent = true;
         protected void OnSelectionBoundsChanged(object o, EventArgs e)
         {
+            if (!PerformSelectionBoundsChangedEvent) 
+                return;
             Debug.WriteLine("SelectionBoundsChanged");
             AdjustRenderedRect();
         }
