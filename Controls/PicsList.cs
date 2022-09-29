@@ -63,7 +63,14 @@ namespace Picscut.Controls
                     Path = path,
                     Bitmap = bmp
                 };
-                Pictures.Add(pic);                
+                if(Pictures.Count==0)
+                {
+                    PicsSize = bmp.Size;
+                    PicsSizeChanged?.Invoke(this, new EventArgs());
+                }
+                if (PicsSize != bmp.Size)
+                    throw new ArgumentException("Image sizes do not match.");
+                Pictures.Add(pic);                               
             }
             catch(Exception e)
             {
@@ -72,5 +79,15 @@ namespace Picscut.Controls
         }
 
         public Picture SelectedPicture { get => SelectedValue as Picture; }
+        
+        public Size PicsSize { get; private set; }
+
+        public int PicsWidth { get => PicsSize.Width; }
+        public int PicsHeight { get => PicsSize.Height; }
+
+        public delegate void OnPicsSizeChanged(object sender, EventArgs e);
+        public event OnPicsSizeChanged PicsSizeChanged;
+
+
     }
 }
