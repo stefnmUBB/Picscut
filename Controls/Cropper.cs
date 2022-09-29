@@ -251,9 +251,20 @@ namespace Picscut.Controls
                             break;
                         }
                     default:break;
-                }                
+                }
+                l = clamp(l, 0, Image.Width);
+                t = clamp(t, 0, Image.Height);
+                r = clamp(r, 0, Image.Width);
+                b = clamp(b, 0, Image.Height);
                 RenderedRect = new Rectangle(l, t, r - l, b - t);
                 UpdateSelection();
+            }
+
+            int clamp(int x, int a, int b)
+            {
+                if (x < a) return a;
+                if (x > b) return b;
+                return x;
             }
 
             for (int i=0;i<4;i++)

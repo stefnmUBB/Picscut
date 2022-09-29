@@ -65,12 +65,39 @@ namespace Picscut
 
         }
 
+        bool boundsUpdating = false;
         private void Cropper_SelectionBoundsChanged(object arg1, EventArgs arg2)
         {
+            if (boundsUpdating)
+                return;
+            boundsUpdating = true;
             SelTopBox.Value = Cropper.SelectionBounds.Top;
             SelLeftBox.Value = Cropper.SelectionBounds.Left;
             SelWidthBox.Value = Cropper.SelectionBounds.Width;
             SelHeightBox.Value = Cropper.SelectionBounds.Height;
+            boundsUpdating = false;
         }
+
+        int clamp(int x, int a, int b)
+        {
+            if (x < a) return a;
+            if (x > b) return b;
+            return x;
+        }
+
+        private void SelBox_ValueChanged(object sender, EventArgs e)
+        {
+            if (boundsUpdating)
+                return;
+            boundsUpdating = true;
+
+            int left = clamp((int)SelLeftBox.Value, 0, Cropper.Image.Width);
+            int top = clamp((int)SelTopBox.Value, 0, Cropper.Image.Height);
+            int width = (int)SelWidthBox.Value;
+            int height = (int)SelHeightBox.Value;
+
+            Cropper.SelectionBounds = new Rectangle(left, top, width, height);
+            boundsUpdating = false;
+        }      
     }
 }

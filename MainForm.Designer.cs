@@ -157,6 +157,7 @@
             this.SelHeightBox.Name = "SelHeightBox";
             this.SelHeightBox.Size = new System.Drawing.Size(96, 20);
             this.SelHeightBox.TabIndex = 7;
+            this.SelHeightBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
             // 
             // SelLeftBox
             // 
@@ -169,6 +170,7 @@
             this.SelLeftBox.Name = "SelLeftBox";
             this.SelLeftBox.Size = new System.Drawing.Size(96, 20);
             this.SelLeftBox.TabIndex = 6;
+            this.SelLeftBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
             // 
             // SelTopBox
             // 
@@ -181,6 +183,7 @@
             this.SelTopBox.Name = "SelTopBox";
             this.SelTopBox.Size = new System.Drawing.Size(96, 20);
             this.SelTopBox.TabIndex = 5;
+            this.SelTopBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
             // 
             // SelWidthBox
             // 
@@ -193,6 +196,7 @@
             this.SelWidthBox.Name = "SelWidthBox";
             this.SelWidthBox.Size = new System.Drawing.Size(96, 20);
             this.SelWidthBox.TabIndex = 4;
+            this.SelWidthBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
             // 
             // label3
             // 
