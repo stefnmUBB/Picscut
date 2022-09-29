@@ -39,5 +39,12 @@ namespace Picscut.Data
                 return _Thumbnail;
             }            
         }
+
+        public Bitmap Crop(Rectangle rect)
+        {
+            var bmp = new Bitmap(rect.Width, rect.Height);
+            Graphics.FromImage(bmp).DrawImageUnscaled(Bitmap, -rect.Left, -rect.Top);
+            return bmp;
+        }
     }
 }

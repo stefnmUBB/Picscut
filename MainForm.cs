@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,9 @@ namespace Picscut
         {            
             for (int k = 1; k < 50; k++)
             {
-                if (System.IO.File.Exists($@"C:\Users\Stefan\Pictures\Screenshots\Screenshot ({k}).png"))
+                if (System.IO.File.Exists($@"C:\Users\Stefan\Pictures\SS\Screenshot ({k}).png"))
                 {
-                    PicsList.AddPicture($@"C:\Users\Stefan\Pictures\Screenshots\Screenshot ({k}).png");
+                    PicsList.AddPicture($@"C:\Users\Stefan\Pictures\SS\Screenshot ({k}).png");
                 }
             }            
         }
@@ -98,6 +99,24 @@ namespace Picscut
 
             Cropper.SelectionBounds = new Rectangle(left, top, width, height);
             boundsUpdating = false;
-        }      
+        }
+
+        private void SelBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Trigger ValueChanged while typing
+            var v = (sender as NumericUpDown).Value;
+        }
+
+        private void SaveOverBtn_Click(object sender, EventArgs e)
+        {
+            foreach(var pic in PicsList.Pictures)
+            {
+                var path = pic.Path;
+                var dir = Path.Combine(Path.GetDirectoryName(path), "cropped");
+                path = Path.Combine(dir, Path.GetFileName(path));
+                Directory.CreateDirectory(dir);
+                pic.Crop(Cropper.SelectionBounds).Save(path);
+            }
+        }
     }
 }

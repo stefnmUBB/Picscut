@@ -34,6 +34,7 @@
             this.BottomBar = new System.Windows.Forms.Panel();
             this.PicsList = new Picscut.Controls.PicsList();
             this.ResultPanel = new System.Windows.Forms.Panel();
+            this.SaveOverBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SelHeightBox = new System.Windows.Forms.NumericUpDown();
             this.SelLeftBox = new System.Windows.Forms.NumericUpDown();
@@ -122,12 +123,23 @@
             // 
             // ResultPanel
             // 
+            this.ResultPanel.Controls.Add(this.SaveOverBtn);
             this.ResultPanel.Controls.Add(this.groupBox1);
             this.ResultPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.ResultPanel.Location = new System.Drawing.Point(536, 0);
             this.ResultPanel.Name = "ResultPanel";
             this.ResultPanel.Size = new System.Drawing.Size(171, 258);
             this.ResultPanel.TabIndex = 2;
+            // 
+            // SaveOverBtn
+            // 
+            this.SaveOverBtn.Location = new System.Drawing.Point(16, 149);
+            this.SaveOverBtn.Name = "SaveOverBtn";
+            this.SaveOverBtn.Size = new System.Drawing.Size(63, 23);
+            this.SaveOverBtn.TabIndex = 1;
+            this.SaveOverBtn.Text = "Save";
+            this.SaveOverBtn.UseVisualStyleBackColor = true;
+            this.SaveOverBtn.Click += new System.EventHandler(this.SaveOverBtn_Click);
             // 
             // groupBox1
             // 
@@ -158,6 +170,7 @@
             this.SelHeightBox.Size = new System.Drawing.Size(96, 20);
             this.SelHeightBox.TabIndex = 7;
             this.SelHeightBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
+            this.SelHeightBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelBox_KeyUp);
             // 
             // SelLeftBox
             // 
@@ -171,6 +184,7 @@
             this.SelLeftBox.Size = new System.Drawing.Size(96, 20);
             this.SelLeftBox.TabIndex = 6;
             this.SelLeftBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
+            this.SelLeftBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelBox_KeyUp);
             // 
             // SelTopBox
             // 
@@ -184,6 +198,7 @@
             this.SelTopBox.Size = new System.Drawing.Size(96, 20);
             this.SelTopBox.TabIndex = 5;
             this.SelTopBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
+            this.SelTopBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelBox_KeyUp);
             // 
             // SelWidthBox
             // 
@@ -197,6 +212,7 @@
             this.SelWidthBox.Size = new System.Drawing.Size(96, 20);
             this.SelWidthBox.TabIndex = 4;
             this.SelWidthBox.ValueChanged += new System.EventHandler(this.SelBox_ValueChanged);
+            this.SelWidthBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelBox_KeyUp);
             // 
             // label3
             // 
@@ -274,6 +290,7 @@
         private System.Windows.Forms.NumericUpDown SelTopBox;
         private System.Windows.Forms.NumericUpDown SelWidthBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button SaveOverBtn;
     }
 }
 
