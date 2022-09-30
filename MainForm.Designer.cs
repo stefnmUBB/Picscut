@@ -104,6 +104,7 @@
             // 
             // PicsList
             // 
+            this.PicsList.AllowDrop = true;
             this.PicsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,6 +121,8 @@
             this.PicsList.TabIndex = 0;
             this.PicsList.PicsSizeChanged += new Picscut.Controls.PicsList.OnPicsSizeChanged(this.PicsList_PicsSizeChanged);
             this.PicsList.SelectedIndexChanged += new System.EventHandler(this.PicsList_SelectedIndexChanged);
+            this.PicsList.DragDrop += new System.Windows.Forms.DragEventHandler(this.PicsList_DragDrop);
+            this.PicsList.DragEnter += new System.Windows.Forms.DragEventHandler(this.PicsList_DragEnter);
             // 
             // ResultPanel
             // 
@@ -252,6 +255,7 @@
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.ClientSize = new System.Drawing.Size(707, 378);
             this.Controls.Add(this.Body);
             this.Controls.Add(this.ResultPanel);

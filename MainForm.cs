@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,14 +21,7 @@ namespace Picscut
         }
 
         private void MainForm_Load(object sender, EventArgs e)
-        {            
-            for (int k = 1; k < 50; k++)
-            {
-                if (System.IO.File.Exists($@"C:\Users\Stefan\Pictures\SS\Screenshot ({k}).png"))
-                {
-                    PicsList.AddPicture($@"C:\Users\Stefan\Pictures\SS\Screenshot ({k}).png");
-                }
-            }            
+        {                            
         }
 
         Size FitRatio(Size container, Size target)
@@ -118,5 +112,31 @@ namespace Picscut
                 pic.Crop(Cropper.SelectionBounds).Save(path);
             }
         }
+
+        private void PicsList_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        private void PicsList_DragDrop(object sender, DragEventArgs e)
+        {
+            bool wasEmpty = PicsList.Pictures.Count == 0;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach(var file in files)
+            {
+                try
+                {
+                    PicsList.AddPicture(file);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show($"Could not add file {file}\n\nReason: {ex.Message}", "Error");
+                }
+            }    
+            if(wasEmpty) // so no selection was active
+            {
+                PicsList.SetSelected(0, true);
+            }
+        }      
     }
 }

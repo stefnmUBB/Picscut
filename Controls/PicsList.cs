@@ -56,28 +56,21 @@ namespace Picscut.Controls
         }                
 
         public void AddPicture(string path)
-        {            
-            try
+        {                       
+            var bmp = new Bitmap(path);
+            var pic = new Picture
             {
-                var bmp = new Bitmap(path);
-                var pic = new Picture
-                {
-                    Path = path,
-                    Bitmap = bmp
-                };
-                if(Pictures.Count==0)
-                {
-                    PicsSize = bmp.Size;
-                    PicsSizeChanged?.Invoke(this, new EventArgs());
-                }
-                if (PicsSize != bmp.Size)
-                    throw new ArgumentException("Image sizes do not match.");
-                Pictures.Add(pic);                               
-            }
-            catch(Exception e)
+                Path = path,
+                Bitmap = bmp
+            };
+            if(Pictures.Count==0)
             {
-                MessageBox.Show(e.Message, "Error");
+                PicsSize = bmp.Size;
+                PicsSizeChanged?.Invoke(this, new EventArgs());
             }
+            if (PicsSize != bmp.Size)
+                throw new ArgumentException("Image sizes do not match.");
+            Pictures.Add(pic);                                                  
         }
 
         public Picture SelectedPicture { get => SelectedValue as Picture; }
