@@ -136,6 +136,8 @@ namespace Picscut
             if(wasEmpty) // so no selection was active
             {
                 PicsList.SetSelected(0, true);
+                if (!Cropper.Visible)
+                    Cropper.Show();
             }
         }      
     }
