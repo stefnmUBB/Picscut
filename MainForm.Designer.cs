@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Body = new System.Windows.Forms.Panel();
             this.PicViewer = new System.Windows.Forms.Panel();
-            this.Cropper = new Picscut.Controls.Cropper();
             this.BottomBar = new System.Windows.Forms.Panel();
-            this.PicsList = new Picscut.Controls.PicsList();
             this.ResultPanel = new System.Windows.Forms.Panel();
             this.SaveOverBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,6 +43,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Cropper = new Picscut.Controls.Cropper();
+            this.PicsList = new Picscut.Controls.PicsList();
             this.Body.SuspendLayout();
             this.PicViewer.SuspendLayout();
             this.BottomBar.SuspendLayout();
@@ -78,21 +79,6 @@
             this.PicViewer.TabIndex = 1;
             this.PicViewer.Resize += new System.EventHandler(this.PicViewer_Resize);
             // 
-            // Cropper
-            // 
-            this.Cropper._SelectionBounds = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.Cropper.EffectiveHeight = 0;
-            this.Cropper.EffectiveWidth = 0;
-            this.Cropper.EffectizeSize = new System.Drawing.Size(0, 0);
-            this.Cropper.Image = null;
-            this.Cropper.Location = new System.Drawing.Point(3, 3);
-            this.Cropper.Name = "Cropper";
-            this.Cropper.RenderedRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.Cropper.SelectionBounds = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.Cropper.Size = new System.Drawing.Size(16, 16);
-            this.Cropper.TabIndex = 1;
-            this.Cropper.SelectionBoundsChanged += new System.Action<object, System.EventArgs>(this.Cropper_SelectionBoundsChanged);
-            // 
             // BottomBar
             // 
             this.BottomBar.Controls.Add(this.PicsList);
@@ -101,28 +87,6 @@
             this.BottomBar.Name = "BottomBar";
             this.BottomBar.Size = new System.Drawing.Size(707, 120);
             this.BottomBar.TabIndex = 1;
-            // 
-            // PicsList
-            // 
-            this.PicsList.AllowDrop = true;
-            this.PicsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PicsList.ColumnWidth = 86;
-            this.PicsList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.PicsList.FormattingEnabled = true;
-            this.PicsList.HorizontalScrollbar = true;
-            this.PicsList.IntegralHeight = false;
-            this.PicsList.ItemHeight = 86;
-            this.PicsList.Location = new System.Drawing.Point(12, 6);
-            this.PicsList.MultiColumn = true;
-            this.PicsList.Name = "PicsList";
-            this.PicsList.Size = new System.Drawing.Size(683, 103);
-            this.PicsList.TabIndex = 0;
-            this.PicsList.PicsSizeChanged += new Picscut.Controls.PicsList.OnPicsSizeChanged(this.PicsList_PicsSizeChanged);
-            this.PicsList.SelectedIndexChanged += new System.EventHandler(this.PicsList_SelectedIndexChanged);
-            this.PicsList.DragDrop += new System.Windows.Forms.DragEventHandler(this.PicsList_DragDrop);
-            this.PicsList.DragEnter += new System.Windows.Forms.DragEventHandler(this.PicsList_DragEnter);
             // 
             // ResultPanel
             // 
@@ -253,6 +217,43 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Left";
             // 
+            // Cropper
+            // 
+            this.Cropper._SelectionBounds = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.Cropper.EffectiveHeight = 0;
+            this.Cropper.EffectiveWidth = 0;
+            this.Cropper.EffectizeSize = new System.Drawing.Size(0, 0);
+            this.Cropper.Image = null;
+            this.Cropper.Location = new System.Drawing.Point(3, 3);
+            this.Cropper.Name = "Cropper";
+            this.Cropper.RenderedRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.Cropper.SelectionBounds = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.Cropper.Size = new System.Drawing.Size(16, 16);
+            this.Cropper.TabIndex = 1;
+            this.Cropper.SelectionBoundsChanged += new System.Action<object, System.EventArgs>(this.Cropper_SelectionBoundsChanged);
+            // 
+            // PicsList
+            // 
+            this.PicsList.AllowDrop = true;
+            this.PicsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PicsList.ColumnWidth = 86;
+            this.PicsList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.PicsList.FormattingEnabled = true;
+            this.PicsList.HorizontalScrollbar = true;
+            this.PicsList.IntegralHeight = false;
+            this.PicsList.ItemHeight = 86;
+            this.PicsList.Location = new System.Drawing.Point(12, 6);
+            this.PicsList.MultiColumn = true;
+            this.PicsList.Name = "PicsList";
+            this.PicsList.Size = new System.Drawing.Size(683, 103);
+            this.PicsList.TabIndex = 0;
+            this.PicsList.PicsSizeChanged += new Picscut.Controls.PicsList.OnPicsSizeChanged(this.PicsList_PicsSizeChanged);
+            this.PicsList.SelectedIndexChanged += new System.EventHandler(this.PicsList_SelectedIndexChanged);
+            this.PicsList.DragDrop += new System.Windows.Forms.DragEventHandler(this.PicsList_DragDrop);
+            this.PicsList.DragEnter += new System.Windows.Forms.DragEventHandler(this.PicsList_DragEnter);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -261,7 +262,9 @@
             this.Controls.Add(this.ResultPanel);
             this.Controls.Add(this.BottomBar);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.Text = "Picscut";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Body.ResumeLayout(false);
             this.PicViewer.ResumeLayout(false);

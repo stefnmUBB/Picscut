@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -113,14 +114,23 @@ namespace Picscut.Controls
                     RenderedRectChanged?.Invoke(this, new EventArgs());
                 }
             }
-        }      
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);            
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             if (Image != null)
             {
                 e.Graphics.DrawImage(Image, ClientRectangle);
-            }           
+            }
+            var region = new Region(e.ClipRectangle);
+            region.Exclude(RenderedRect);
+            e.Graphics.FillRegion(new SolidBrush(Color.FromArgb(128, 0, 0, 0)), region);
+            
             if (EffectiveHeight == 0 || EffectiveWidth == 0)
                 return;            
             e.Graphics.DrawRectangle(Pens.Red, RenderedRect);
